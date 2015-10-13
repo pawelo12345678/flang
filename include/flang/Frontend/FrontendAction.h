@@ -100,8 +100,8 @@ protected:
   /// @}
 
 public:
-  FrontendAction();
-  virtual ~FrontendAction();
+  FrontendAction() =default;
+  virtual ~FrontendAction() =default;
 
   /// @name Compiler Instance Access
   /// @{
@@ -123,7 +123,7 @@ public:
   }
 
   const StringRef getCurrentFile() const {
-    CurrentASTUnit.get()->getOriginalSourceFileName();
+    return CurrentASTUnit.get()->getOriginalSourceFileName();
   }
 
   InputKind getCurrentFileKind() const {
@@ -176,13 +176,16 @@ public:
 
 /// \brief Abstract base class to use for AST consumer-based frontend actions.
 class ASTFrontendAction : public FrontendAction {
+public:
+  ASTFrontendAction() =default;
+  ~ASTFrontendAction() =default;
 protected:
   /// \brief Implement the ExecuteAction interface by running Sema on
   /// the already-initialized AST consumer.
   ///
   /// This will also take care of instantiating a code completion consumer if
   /// the user requested it and the action supports it.
-  virtual void ExecuteAction();
+  virtual void ExecuteAction() =0;
 
 };
 

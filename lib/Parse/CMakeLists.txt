@@ -1,5 +1,4 @@
 add_flang_library(flangParse
-  Lexer.cpp
   ParseDecl.cpp
   ParseSpecStmt.cpp
   ParseExec.cpp
@@ -16,4 +15,8 @@ add_dependencies(flangParse
 
 target_link_libraries(flangParse
   flangAST
+  flangBasic
+  flangLex
+  flangSema
+  LLVMSupport
   )

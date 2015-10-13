@@ -230,7 +230,7 @@ ASTConsumer *CodeGenAction::CreateASTConsumer(CompilerInstance &CI,
 
 void CodeGenAction::ExecuteAction() {
   // Otherwise follow the normal AST path.
-  this->ASTFrontendAction::ExecuteAction();
+  // this->ASTFrontendAction::ExecuteAction();
 }
 
 //

@@ -10,6 +10,9 @@
 #ifndef FLANG_PARSER_FIXEDFORM_H
 #define FLANG_PARSER_FIXEDFORM_H
 
+#include <string>
+#include <cctype>
+
 #include "flang/Basic/LLVM.h"
 #include "flang/Basic/TokenKinds.h"
 #include "llvm/ADT/StringSet.h"
@@ -44,7 +47,12 @@ public:
   void operator=(ArrayRef<KeywordFilter> Filters);
 
   void Register(tok::TokenKind Keyword);
-  bool Matches(StringRef Identifier) const;
+  bool Matches(StringRef Identifier) const {
+    std::string Name(Identifier);
+    for (size_t I = 0, E = Name.size(); I != E; ++I)
+      Name[I] = ::tolower(Name[I]);
+    return Keywords.find(Name) != Keywords.end();
+  }
 };
 
 /// \brief A set of executable statement and construct

@@ -26,5 +26,16 @@ add_flang_library(flangCodeGen
 
 target_link_libraries(flangCodeGen
   flangAST
+  flangBasic
+  flangFrontend
+  flangSema
+  LLVMAnalysis
+  LLVMBitWriter
   LLVMCore
+  LLVMInstrumentation
+  LLVMLinker
+  LLVMMC
+  LLVMSupport
+  LLVMTarget
+  LLVMipo
   )

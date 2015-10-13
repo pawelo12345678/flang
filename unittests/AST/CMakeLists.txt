@@ -9,4 +9,5 @@ target_link_libraries(exprEvaluatorTest
   flangSema
   flangBasic
   flangCodeGen
+  LLVMSupport
   )

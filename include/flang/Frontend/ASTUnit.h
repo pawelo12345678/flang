@@ -57,7 +57,7 @@ class ASTUnit {
 private:
   llvm::IntrusiveRefCntPtr<LangOptions>         LangOpts;
   llvm::IntrusiveRefCntPtr<DiagnosticsEngine>   Diagnostics;
-  llvm::IntrusiveRefCntPtr<TargetInfo>          Target;
+  // llvm::IntrusiveRefCntPtr<TargetInfo>          Target;
   llvm::IntrusiveRefCntPtr<ASTContext>          Ctx;
   llvm::IntrusiveRefCntPtr<TargetOptions>       TargetOpts;
 
@@ -94,7 +94,7 @@ private:
 
 public:
   
-  ~ASTUnit();
+  ~ASTUnit() =default;
 
   const DiagnosticsEngine &getDiagnostics() const { return *Diagnostics; }
   DiagnosticsEngine &getDiagnostics()             { return *Diagnostics; }

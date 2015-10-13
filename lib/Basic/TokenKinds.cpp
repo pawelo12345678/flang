@@ -12,22 +12,8 @@
 //===----------------------------------------------------------------------===//
 
 #include "flang/Basic/TokenKinds.h"
-#include <cassert>
 
 namespace flang {
-
-static char const * const TokNames[] = {
-#define TOK(X)       #X,
-#define KEYWORD(X,Y) #X,
-#define FORMAT_SPEC(X,Y) #X,
-#include "flang/Basic/TokenKinds.def"
-  0
-};
-
-const char *tok::getTokenName(enum TokenKind Kind) {
-  assert(Kind < tok::NUM_TOKENS && "Invalid token kind!");
-  return TokNames[Kind];
-}
 
 const char *tok::getTokenSimpleSpelling(enum TokenKind Kind) {
   switch (Kind) {

@@ -21,6 +21,11 @@ target_link_libraries(flang
   flangSema
   flangBasic
   flangCodeGen
+  LLVMCore
+  LLVMMC
+  LLVMSupport
+  LLVMTarget
+  LLVMTransformUtils
   )
 
 set_target_properties(flang PROPERTIES VERSION ${FLANG_EXECUTABLE_VERSION})

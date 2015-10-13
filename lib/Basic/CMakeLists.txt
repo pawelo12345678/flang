@@ -27,4 +27,9 @@ add_dependencies(flangBasic
   FlangDiagnosticFrontend
   FlangDiagnosticGroups
   FlangDiagnosticSema
-  )  
+  )
+
+target_link_libraries(flangBasic
+  flangAST
+  LLVMSupport
+  )

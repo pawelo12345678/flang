@@ -42,13 +42,6 @@ void KeywordMatcher::Register(tok::TokenKind Keyword) {
   Keywords.insert(Name);
 }
 
-bool KeywordMatcher::Matches(StringRef Identifier) const {
-  std::string Name(Identifier);
-  for (size_t I = 0, E = Name.size(); I != E; ++I)
-    Name[I] = ::tolower(Name[I]);
- return Keywords.find(Name) != Keywords.end();
-}
-
 static const tok::TokenKind AmbiguousExecKeywords[] = {
   // ASSIGN10TOI
   tok::kw_ASSIGN,

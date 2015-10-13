@@ -1,4 +1,4 @@
-##===- lib/Makefile ----------------------------------------*- Makefile -*-===##
+##===- flang/lib/Lex/Makefile ------------------------------*- Makefile -*-===##
 # 
 #                     The LLVM Compiler Infrastructure
 #
@@ -6,9 +6,12 @@
 # License. See LICENSE.TXT for details.
 # 
 ##===----------------------------------------------------------------------===##
+#
+#  This implements the Lexer library for the Fortran front-end.
+#
+##===----------------------------------------------------------------------===##
 
-FLANG_LEVEL := ..
-
-PARALLEL_DIRS = Basic Parse AST Lex Frontend Sema
+FLANG_LEVEL := ../..
+LIBRARYNAME := flangLex
 
 include $(FLANG_LEVEL)/Makefile

@@ -23,7 +23,7 @@
 #include <utility>
 
 namespace llvm {
-class raw_fd_ostream;
+class raw_pwrite_stream;
 class Timer;
 }
 
@@ -117,11 +117,14 @@ class CompilerInstance {
   struct OutputFile {
     std::string Filename;
     std::string TempFilename;
-    raw_ostream *OS;
+    std::unique_ptr<raw_ostream> OS;
 
     OutputFile(const std::string &filename, const std::string &tempFilename,
-               raw_ostream *os)
-      : Filename(filename), TempFilename(tempFilename), OS(os) { }
+               std::unique_ptr<raw_ostream> OS)
+      : Filename(filename), TempFilename(tempFilename), OS(std::move(OS)) {}
+    OutputFile(OutputFile &&O)
+      : Filename(std::move(O.Filename)),
+        TempFilename(std::move(O.TempFilename)), OS(std::move(O.OS)) {}
   };
 
   /// The list of active output files.
@@ -374,7 +377,7 @@ public:
   /// addOutputFile - Add an output file onto the list of tracked output files.
   ///
   /// \param OutFile - The output file info.
-  void addOutputFile(const OutputFile &OutFile);
+  void addOutputFile(OutputFile &&OutFile);
 
   /// clearOutputFiles - Clear the output file list, destroying the contained
   /// output streams.
@@ -449,7 +452,7 @@ public:
   /// atomically replace the target output on success).
   ///
   /// \return - Null on error.
-  llvm::raw_fd_ostream *
+  llvm::raw_pwrite_stream *
   createDefaultOutputFile(bool Binary = true, StringRef BaseInput = "",
                           StringRef Extension = "");
 
@@ -457,7 +460,7 @@ public:
   /// optionally deriving the output path name.
   ///
   /// \return - Null on error.
-  llvm::raw_fd_ostream *
+  llvm::raw_pwrite_stream *
   createOutputFile(StringRef OutputPath,
                    bool Binary, bool RemoveFileOnSignal,
                    StringRef BaseInput,
@@ -490,7 +493,7 @@ public:
   /// stored here on success.
   /// \param TempPathName [out] - If given, the temporary file path name
   /// will be stored here on success.
-  static llvm::raw_fd_ostream *
+  static llvm::raw_pwrite_stream *
   createOutputFile(StringRef OutputPath, std::string &Error,
                    bool Binary, bool RemoveFileOnSignal,
                    StringRef BaseInput,

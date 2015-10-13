@@ -23,7 +23,3 @@ add_dependencies(flangAST
   FlangStmtNodes
   FlangExprNodes
   )
-
-target_link_libraries(flangAST
-  flangBasic
-  )

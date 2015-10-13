@@ -17,4 +17,7 @@ add_flang_library(flangSema
 
 target_link_libraries(flangSema
   flangAST
+  flangBasic
+  flangLex
+  LLVMSupport
   )
